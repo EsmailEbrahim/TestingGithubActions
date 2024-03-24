@@ -1,0 +1,33 @@
+name: This is Workflow Name
+run-name: This is run-name for workflow (as a title)
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  This_is_First_Job_Name:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is github.actor '${{ github.actor }}'."
+      - run: echo "This is github.event_name '${{ github.event_name }}' event."
+      - run: echo "This is runner.os '${{ runner.os }}' server hosted by GitHub."
+      - run: echo "This is github.ref '${{ github.ref }}'."
+      - name: This is a Name for Check out repository code by  actions/checkout@v4 (as a Function)
+        uses: actions/checkout@v4
+      - run: echo "This is github.repository '${{ github.repository }}'."
+      - name: This is a Name for List Files in the Repository by run ls github.workspace (as a Function)
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "This is job.status '${{ job.status }}'."
+      - run: echo "This is github.sha '${{ github.sha }}' commit SHA."
+      - run: echo "This is github.run_id '${{ github.run_id }}'."
+      - run: echo "This is github.run_number '${{ github.run_number }}'."
+      - run: echo "This is github.workflow '${{ github.workflow }}'."
+      - run: echo "This is github.workspace '${{ github.workspace }}'."
+      - run: echo "This is steps.<step_id>.outputs.<output_name> '${{ steps.<step_id>.outputs.<output_name> }}'."
+      - run: echo "This is secrets.<secret_name> '${{ secrets.<secret_name> }}'."
+      - run: echo "This is github.repository_owner '${{ github.repository_owner }}'."
+      - run: echo "This is github.repository_name '${{ github.repository_name }}'."
+      - run: echo "This is github.event_path '${{ github.event_path }}'."
+      - run: echo "This is github.event.pull_request.number '${{ github.event.pull_request.number }}'."
+      - run: echo "This is github.event.workflow_run.conclusion '${{ github.event.workflow_run.conclusion }}'."
+      - run: echo "This is job.step_logs_url '${{ job.step_logs_url }}'."
+      - run: echo "This is job.repository '${{ job.repository }}'."
+      - run: echo "This is job.workspace '${{ job.workspace }}'."
