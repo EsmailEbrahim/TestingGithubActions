@@ -1,4 +1,5 @@
 name: Esmail Hello World Workflow
+run-name: Esmail Run Name
 on:
   push:
     branches:
