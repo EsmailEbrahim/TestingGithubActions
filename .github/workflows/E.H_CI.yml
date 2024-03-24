@@ -1,5 +1,5 @@
 name: Esmail Hello World Workflow
-run-name: Esmail Run Name
+run-name: ${{ github.actor }} Run Name
 on:
   push:
     branches:
