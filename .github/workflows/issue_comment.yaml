@@ -19,3 +19,10 @@ jobs:
             Hi ${{ github.event.issue.user.login }}!
             Your issue will be solved soon, Thanks
           reactions: 'heart'
+      - name: Add reactions
+        uses: aidan-mundy/react-to-issue@v1.INSERT.VERSION
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          issue-number: ${{ github.event.issue.number }}
+          reactions: +1, hooray, laugh
