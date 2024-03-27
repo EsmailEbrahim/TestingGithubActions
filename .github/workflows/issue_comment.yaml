@@ -1,15 +1,18 @@
-name: Add a comment on new issues
+name: Add a comment and reactions on new issues
 on:
   issues:
     types: [opened]
 jobs:
+  dump-github-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Dump github context"
+        run: echo '${{toJSON(github.event)}}' | jq
+        shell: bash
   comment-with-action:
     runs-on: ubuntu-latest
     steps:
-      - name: "dump github context"
-        run: echo '${{toJSON(github.event)}}' | jq
-        shell: bash
-      - name: "Create comment"
+      - name: "Create an issue comment by action"
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -19,10 +22,24 @@ jobs:
             Hi ${{ github.event.issue.user.login }}!
             Your issue will be solved soon, Thanks
           reactions: 'heart'
-      - name: Add reactions
+      - name: "Add reactions to issue by action"
         uses: aidan-mundy/react-to-issue@v1.1.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           issue-number: ${{ github.event.issue.number }}
           reactions: +1, hooray, laugh
+  comment-with-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Create an issue comment by api"
+        run: |
+          gh api -X POST \
+            http://api.github.com/repo/${REPOSITORY}/issues/${ISSUE_NUMBER}/comments \
+            -f body='
+            Comment
+            '
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.event.repository.full_name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
