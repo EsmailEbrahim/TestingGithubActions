@@ -1,20 +1,36 @@
-name: Add a comment on new issues
+# name: Add a comment on new issues
+# on:
+#   issues:
+#     types: [opened]
+# jobs:
+#   comment-with-action:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: "dump github context"
+#         run: echo '${{toJSON(github.event)}}' | jq
+#         shell: bash
+#       - name: "Create comment"
+#         uses: peter-evans/create-or-update-comment@v4
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           repository: ${{ github.repository }}
+#           issue-number: ${{ github.event.issue.number }}
+#           body: |
+#             Hi ${{ github.event.issue.user.login }}!
+#           reactions: '+1'
+
+name: issue-checklist
+
 on:
   issues:
     types: [opened]
+
 jobs:
-  comment-with-action:
+  comment:
     runs-on: ubuntu-latest
+
     steps:
-      - name: "dump github context"
-        run: echo '${{toJSON(github.event)}}' | jq
-        shell: bash
-      - name: "Create comment"
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            Hi ${{ github.event.issue.user.login }}!
-          reactions: '+1'
+    - uses: ben-z/actions-comment-on-issue@1.0.2
+      with:
+        message: "Gentle reminder:\n* Did you go through all of the troubleshooting steps outlined in README.md?"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
