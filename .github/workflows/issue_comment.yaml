@@ -20,7 +20,7 @@ jobs:
             Your issue will be solved soon, Thanks
           reactions: 'heart'
       - name: Add reactions
-        uses: aidan-mundy/react-to-issue@v1.INSERT.VERSION
+        uses: aidan-mundy/react-to-issue@v1.1.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
