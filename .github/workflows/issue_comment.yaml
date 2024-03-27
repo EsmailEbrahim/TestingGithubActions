@@ -34,12 +34,9 @@ jobs:
     steps:
       - name: "Create an issue comment by api"
         run: |
-          gh api -X POST \
-            https://api.github.com/repo/${REPOSITORY}/issues/${ISSUE_NUMBER}/comments \
+          gh api --method POST repos/${{github.event.repository.full_name}}/issues/${{ github.event.issue.number }}/comments \
             -f body='
             Comment
             '
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: ${{ github.event.repository.full_name }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
