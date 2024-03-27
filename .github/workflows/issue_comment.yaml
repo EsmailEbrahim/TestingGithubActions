@@ -37,6 +37,7 @@ jobs:
           gh api --method POST repos/${{github.event.repository.full_name}}/issues/${{ github.event.issue.number }}/comments \
             -f body='
             Comment
-            '
+            ' \
+            -f reactions= 'eyes'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
